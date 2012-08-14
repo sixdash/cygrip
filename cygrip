@@ -46,7 +46,7 @@ done
 
 # Install the startup batch file
 START_BATCH_FILE="$DIST_DIR/run.bat"
-echo "Creating startup batch file '$START_BATCH_FILE' "
+echo "Creating startup batch file '$START_BATCH_FILE' ..."
 cat >"$START_BATCH_FILE" <<EOF
 for /F %%A in ('cd') do set WD=%%A
 bin\mount %WD%\ /
@@ -58,3 +58,10 @@ start bin\mintty.exe -e /bin/bash --login -i -
 EOF
 unix2dos "$START_BATCH_FILE" 2>/dev/null
 chmod a+x "$START_BATCH_FILE"
+
+# Setup shell startup file
+SHELL_STARTUP_FILE="$DIST_DIR/home/.profile"
+echo "Creating shell startup file '$SHELL_STARTUP_FILE' ..."
+cat >"$SHELL_STARTUP_FILE" <<EOF
+export PATH=/bin
+EOF
