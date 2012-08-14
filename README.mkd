@@ -1,0 +1,7 @@
+
+# Introduction
+**cygrip** is a small utility that rips commands from an existing **Cygwin**
+installation to form a highly customized __minimal__ system.
+
+# Usage
+`cygrip CONFIG_FILE`
