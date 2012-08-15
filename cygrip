@@ -5,6 +5,7 @@ CONF="$1"
 CMD_MUST_HAVE="mount bash mintty cygwin-console-helper"
 DIST_DIR="dist"
 BIN_DIR="$DIST_DIR/bin"
+SHARE_DIR="$DIST_DIR/usr/share"
 HOME_DIR="$DIST_DIR/home"
 MANIFEST_FILE="$DIST_DIR/manifest"
 DEPENDENCY_FILE="$DIST_DIR/dependencies"
@@ -22,6 +23,7 @@ echo "Initializing directories ..."
 rm -rf "$DIST_DIR"
 mkdir -p "$DIST_DIR"
 mkdir -p "$BIN_DIR"
+mkdir -p "$SHARE_DIR"
 mkdir -p "$HOME_DIR"
 
 # Pre-process each listed command
@@ -43,6 +45,10 @@ for dep in `sort "$DEPENDENCY_FILE" | uniq`; do
   echo "Copying dependency '$dep' ..."
   cp -L "$dep" "$BIN_DIR/" || die 3 "Couldn't copy '$dep'"
 done
+
+# Setup terminfo
+echo "Copying 'terminfo' ..."
+cp -rL /usr/share/terminfo "$SHARE_DIR/"
 
 # Install the startup batch file
 START_BATCH_FILE="$DIST_DIR/run.bat"
