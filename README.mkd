@@ -5,3 +5,7 @@ installation to form a highly customized __minimal__ system.
 
 # Usage
 `cygrip CONFIG_FILE`
+
+# Configuration file format
+Just put name of command you want to rip in the file, one command per line, full
+path is not needed, the script will find it out.
