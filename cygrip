@@ -64,8 +64,32 @@ unix2dos "$START_BATCH_FILE" 2>/dev/null
 chmod a+x "$START_BATCH_FILE"
 
 # Setup shell startup file
-SHELL_STARTUP_FILE="$DIST_DIR/home/.profile"
+SHELL_STARTUP_FILE="$HOME_DIR/.profile"
 echo "Creating shell startup file '$SHELL_STARTUP_FILE' ..."
 cat >"$SHELL_STARTUP_FILE" <<EOF
 export PATH=/bin
+case "\$-" in
+  *i*)
+    # Aliases
+    alias ls='ls --color'
+    alias rm='rm -i'
+    alias mv='mv -i'
+    alias cp='cp -i'
+    ;;
+esac
+EOF
+
+# Setup mintty configuration file
+MINTTY_CONF_FILE="$HOME_DIR/.minttyrc"
+echo "Creating mintty configuration file '$MINTTY_CONF_FILE' ..."
+cat >"$MINTTY_CONF_FILE" <<EOF
+BoldAsFont=no
+Font=Courier New
+FontHeight=12
+Locale=en_US
+Charset=UTF-8
+Transparency=medium
+CursorType=block
+Term=xterm-256color
+Scrollbar=none
 EOF
